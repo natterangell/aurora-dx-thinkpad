@@ -49,11 +49,11 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ## the following RUN directive does all the things required to run "build.sh" as recommended
 
 COPY --from=ghcr.io/ublue-os/akmods-extra:main-40 /rpms/ /tmp/rpms
-RUN wget -r -l1 -np "https://negativo17.org/repos/multimedia/fedora-40/x86_64/" -P /tmp  -A "displaylink*.rpm"
-RUN wget -r -l1 -np "https://negativo17.org/repos/multimedia/fedora-40/x86_64/" -P /tmp  -A "libevdi*.rpm"
+# RUN wget -r -l1 -np "https://negativo17.org/repos/multimedia/fedora-40/x86_64/" -P /tmp  -A "displaylink*.rpm"
+# RUN wget -r -l1 -np "https://negativo17.org/repos/multimedia/fedora-40/x86_64/" -P /tmp  -A "libevdi*.rpm"
 RUN find /tmp/rpms
-RUN find /tmp/negativo17.org/repos/multimedia/fedora-40/x86_64
-RUN rpm-ostree install /tmp/rpms/kmods/kmod-evdi*.rpm /tmp/negativo17.org/repos/multimedia/fedora-40/x86_64/*.rpm
+# RUN find /tmp/negativo17.org/repos/multimedia/fedora-40/x86_64
+RUN rpm-ostree install /tmp/rpms/kmods/*evdi*.rpm
 
 COPY build.sh /tmp/build.sh
 RUN mkdir -p /var/lib/alternatives && \
