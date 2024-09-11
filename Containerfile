@@ -48,7 +48,7 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended
 
-COPY --from=ghcr.io/ublue-os/akmods-extra:main-40 /rpms/ /tmp/rpms
+COPY --from=ghcr.io/ublue-os/akmods-extra:main-39 /rpms/ /tmp/rpms
 RUN curl -Lo /etc/yum.repos.d/nedora-negativo17.repo https://negativo17.org/repos/fedora-negativo17.repo
 # RUN wget -r -l1 -np "https://negativo17.org/repos/multimedia/fedora-40/x86_64/" -P /tmp  -A "displaylink*.rpm"
 # RUN wget -r -l1 -np "https://negativo17.org/repos/multimedia/fedora-40/x86_64/" -P /tmp  -A "libevdi*.rpm"
