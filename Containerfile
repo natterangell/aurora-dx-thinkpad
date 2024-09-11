@@ -15,7 +15,7 @@
 # - "base"
 #
 #  "aurora", "bazzite", "bluefin" or "ucore" may also be used but have different suffixes.
-ARG SOURCE_IMAGE="bluefin"
+ARG SOURCE_IMAGE="aurora"
 
 ## SOURCE_SUFFIX arg should include a hyphen and the appropriate suffix name
 # These examples all work for silverblue/kinoite/sericea/onyx/lazurite/vauxite/base
@@ -33,28 +33,26 @@ ARG SOURCE_IMAGE="bluefin"
 # - stable-zfs
 # - stable-nvidia-zfs
 # - (and the above with testing rather than stable)
-ARG SOURCE_SUFFIX=""
+ARG SOURCE_SUFFIX="-dx"
 
 ## SOURCE_TAG arg must be a version built for the specific image: eg, 39, 40, gts, latest
-ARG SOURCE_TAG="gts"
+ARG SOURCE_TAG="stable"
 
 
 ### 2. SOURCE IMAGE
 ## this is a standard Containerfile FROM using the build ARGs above to select the right upstream image
 FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 
-
 ### 3. MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended
 
-COPY --from=ghcr.io/ublue-os/akmods-extra:main-39 /rpms/ /tmp/rpms
-RUN curl -Lo /etc/yum.repos.d/nedora-negativo17.repo https://negativo17.org/repos/fedora-negativo17.repo
-# RUN wget -r -l1 -np "https://negativo17.org/repos/multimedia/fedora-40/x86_64/" -P /tmp  -A "displaylink*.rpm"
-# RUN wget -r -l1 -np "https://negativo17.org/repos/multimedia/fedora-40/x86_64/" -P /tmp  -A "libevdi*.rpm"
+## Add displaylink support
+COPY --from=ghcr.io/ublue-os/akmods-extra:main-40 /rpms/ /tmp/rpms
+RUN curl -Lo /etc/yum.repos.d/fedora-multimedia.repo https://negativo17.org/repos/fedora-multimedia.repo
 RUN find /tmp/rpms
-# RUN find /tmp/negativo17.org/repos/multimedia/fedora-40/x86_64
 RUN rpm-ostree install /tmp/rpms/kmods/*evdi*.rpm
+RUN sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/fedora-multimedia.repo
 
 COPY build.sh /tmp/build.sh
 RUN mkdir -p /var/lib/alternatives && \
