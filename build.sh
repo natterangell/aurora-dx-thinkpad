@@ -14,9 +14,6 @@ RELEASE="$(rpm -E %fedora)"
 
 # this installs a package from fedora repos
 rpm-ostree install thinkfan
-rpm-ostree install /tmp/rpms/ublue-os/ublue-os-akmods*.rpm
-rpm-ostree install /tmp/rpms/kmods/kmod-v4l2loopback*.rpm
-rpm-ostree install /tmp/rpms/kmods/kmod-evdi*.rpm
 
 # this would install a package from rpmfusion
 # rpm-ostree install vlc
