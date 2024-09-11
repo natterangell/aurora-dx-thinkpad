@@ -13,7 +13,7 @@ RELEASE="$(rpm -E %fedora)"
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # Add repo
-curl -Lo /etc/yum.repos.d/nedora-negativo17.repo https://negativo17.org/repos/fedora-negativo17.repo
+# curl -Lo /etc/yum.repos.d/nedora-negativo17.repo https://negativo17.org/repos/fedora-negativo17.repo
 
 # this installs a package from fedora repos
 rpm-ostree install thinkfan displaylink
