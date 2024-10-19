@@ -11,7 +11,9 @@ RELEASE="$(rpm -E %fedora)"
 # RPMfusion repos are available by default in ublue main images
 # Install thinkfan, tlp, igt-gpu-tools and displaylink kernel module
 #rpm-ostree install tlp thinkfan igt-gpu-tools /tmp/rpms/kmods/*evdi*.rpm
-rpm-ostree install /tmp/rpms/kmods/*evdi*.rpm
+#
+# Add displaylink/evdi and howdy
+rpm-ostree install /tmp/rpms/kmods/*evdi*.rpm howdy
 
 #Disable negativo repo after installing displaylink, as it otherwise conflicts with RPM-fusion
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/fedora-multimedia.repo
