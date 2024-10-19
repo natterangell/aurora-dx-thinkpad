@@ -47,6 +47,9 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended
 
+## Add Copr repo for howdy support
+RUN curl -Lo /etc/yum.repos.d/howdy-copr.repo https://copr.fedorainfracloud.org/coprs/principis/howdy/repo/fedora-40/principis-howdy-fedora-40.repo
+
 ## Add displaylink support
 COPY --from=ghcr.io/ublue-os/akmods-extra:coreos-stable-40 /rpms/ /tmp/rpms
 RUN curl -Lo /etc/yum.repos.d/fedora-multimedia.repo https://negativo17.org/repos/fedora-multimedia.repo
