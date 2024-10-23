@@ -48,7 +48,7 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ## the following RUN directive does all the things required to run "build.sh" as recommended
 
 ## Add Copr repo for howdy support
-RUN curl -Lo /etc/yum.repos.d/howdy-copr.repo https://copr.fedorainfracloud.org/coprs/principis/howdy/repo/fedora-40/principis-howdy-fedora-40.repo
+RUN curl -Lo /etc/yum.repos.d/howdy-copr.repo https://copr.fedorainfracloud.org/coprs/principis/howdy-beta/repo/fedora-40/principis-howdy-beta-fedora-40.repo
 
 ## Add displaylink support
 COPY --from=ghcr.io/ublue-os/akmods-extra:coreos-stable-40 /rpms/ /tmp/rpms
